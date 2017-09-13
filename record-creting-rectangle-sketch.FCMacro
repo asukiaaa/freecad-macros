@@ -1,0 +1,34 @@
+# -*- coding: utf-8 -*-
+
+# Macro Begin: /home/asuki/gitprojects/freecad-macros/record-creting-rectangle-sketch.FCMacro +++++++++++++++++++++++++++++++++++++++++++++++++
+import FreeCAD
+import Sketcher
+
+App.newDocument("MeishoMisette")
+#App.setActiveDocument("MeishoMisette")
+#App.ActiveDocument=App.getDocument("MeishoMisette")
+#Gui.ActiveDocument=Gui.getDocument("MeishoMisette")
+#Gui.activateWorkbench("SketcherWorkbench")
+App.activeDocument().addObject('Sketcher::SketchObject','Sketch')
+App.activeDocument().Sketch.Placement = App.Placement(App.Vector(0.000000,0.000000,0.000000),App.Rotation(0.000000,0.000000,0.000000,1.000000))
+#Gui.activeDocument().activeView().setCamera('#Inventor V2.1 ascii \n OrthographicCamera {\n viewportMapping ADJUST_CAMERA \n position 0 0 87 \n orientation 0 0 1  0 \n nearDistance -112.88701 \n farDistance 287.28702 \n aspectRatio 1 \n focalDistance 87 \n height 143.52005 }')
+#Gui.activeDocument().setEdit('Sketch')
+geoList = []
+geoList.append(Part.Line(App.Vector(4.558681,26.330351,0),App.Vector(43.386124,26.330351,0)))
+geoList.append(Part.Line(App.Vector(43.386124,26.330351,0),App.Vector(43.386124,2.593738,0)))
+geoList.append(Part.Line(App.Vector(43.386124,2.593738,0),App.Vector(4.558681,2.593738,0)))
+geoList.append(Part.Line(App.Vector(4.558681,2.593738,0),App.Vector(4.558681,26.330351,0)))
+App.ActiveDocument.Sketch.addGeometry(geoList,False)
+conList = []
+conList.append(Sketcher.Constraint('Coincident',0,2,1,1))
+conList.append(Sketcher.Constraint('Coincident',1,2,2,1))
+conList.append(Sketcher.Constraint('Coincident',2,2,3,1))
+conList.append(Sketcher.Constraint('Coincident',3,2,0,1))
+conList.append(Sketcher.Constraint('Horizontal',0))
+conList.append(Sketcher.Constraint('Horizontal',2))
+conList.append(Sketcher.Constraint('Vertical',1))
+conList.append(Sketcher.Constraint('Vertical',3))
+App.ActiveDocument.Sketch.addConstraint(conList)
+
+App.ActiveDocument.recompute()
+# Macro End: /home/asuki/gitprojects/freecad-macros/record-creting-rectangle-sketch.FCMacro +++++++++++++++++++++++++++++++++++++++++++++++++
